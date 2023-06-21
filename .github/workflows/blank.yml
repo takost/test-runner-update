@@ -16,4 +16,4 @@ jobs:
         uses: actions/github-script@v1
         with:
           # The script to run
-          script: node -v
+          script: nodejs -v
