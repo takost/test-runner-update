@@ -8,12 +8,9 @@ env:
 
 jobs:
   greeting_job:
-    runs-on: ubuntu-latest
-    env:
-      Greeting: Hello
+    runs-on: self-hosted
     steps:
-      - name: GitHub Script
-        uses: actions/github-script@v1
-        with:
-          # The script to run
-          script: nodejs -v
+    - name: "Say Hello Mona it's Monday"
+      run: echo "$Greeting $First_Name. Today is $DAY_OF_WEEK!"
+      env:
+        First_Name: Mona
