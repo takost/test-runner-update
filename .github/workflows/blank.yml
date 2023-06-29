@@ -1,16 +1,29 @@
-name: Greeting on variable day
-
+name: Master Workflow
 on:
-  workflow_dispatch
-
-env:
-  DAY_OF_WEEK: Monday
+  workflow_dispatch:
+  push:
+    branches:
+      - 'development'
+      - 'preset/*'
+      - 'technical'
+      - 'rc/[0-9]+.[0-9]+.[0-9]+'
+      - 'rc/[0-9]+.[0-9]+.[0-9]+.[1-9]+'
+concurrency:
+  group: ${{GITHUB_WORKFLOW}}-${{GITHUB_REF_NAME}}
+#  group: ${{ github.workflow }}-${{ github.ref_name }}
 
 jobs:
-  greeting_job:
-    runs-on: self-hosted
+  run-prebuild-tests:
+    runs-on: ubuntu-latest
+    name: Runs all pre-build tests
     steps:
-    - name: "Say Hello Mona it's Monday"
-      run: echo "$Greeting $First_Name. Today is $DAY_OF_WEEK!"
-      env:
-        First_Name: Mona
+
+      - name: Checkout REPOSITORY_NAME
+        uses: actions/checkout@v3
+
+      - name: echo ref_name
+        run: | 
+          echo ${GITHUB_WORKFLOW}-${GITHUB_REF_NAME}
+          echo ${{ github.workflow }}-${{ github.ref_name }}
+          sleep 70
+          echo ${GITHUB_REF}
