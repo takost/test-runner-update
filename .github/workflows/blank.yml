@@ -9,7 +9,7 @@ on:
       - 'rc/[0-9]+.[0-9]+.[0-9]+'
       - 'rc/[0-9]+.[0-9]+.[0-9]+.[1-9]+'
 concurrency:
-  group: ${{GITHUB_WORKFLOW}}-${{GITHUB_REF_NAME}}
+  group: ${{vars.GITHUB_WORKFLOW}}-${{vars.GITHUB_REF_NAME}}
 #  group: ${{ github.workflow }}-${{ github.ref_name }}
 
 jobs:
